@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+# Form Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Form Generator is a React-based web application for creating and managing forms.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Installation](#installation)
+- [Usage](#usage)
+- [How to Use](#how-to-use)
+- [Scripts](#scripts)
+- [Important Packages](#important-packages)
+- [Development](#development)
+- [Deployment](#deployment)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To get started with this project, clone the repository and install the dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone <repository-url>
+cd form-generator
+npm install
+```
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run the application in development mode:
 
-### `npm run build`
+```bash
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This will start the development server. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to Use
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Follow these steps to create a form using the Form Generator:
 
-### `npm run eject`
+1. Select an input type:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   - Choose one of the four types of input from the dropdown menu in the top left corner.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Fill in the necessary information:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   - For text input:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+     - Enter the label and placeholder text.
+     - Select input attributes (you can choose more than one):
+       - Required
+       - Disabled
+       - Numbers only
+       - Password
+       - Multi-line input
+     - Choose input validation (single option):
+       - Text (default)
+       - Email
+       - Phone number
 
-## Learn More
+   - For select/checkbox/radio inputs:
+     - Enter the title.
+     - Enter option labels.
+     - You can add more options or delete added ones.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Save the input:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   - Click on the 'Save this' CTA (Call to Action) button below the input configuration.
 
-### Code Splitting
+4. Preview and edit:
+   - On the right side of the screen, you can preview how your form looks.
+   - You can switch to the JSON config tab to view the JSON configuration of your current form.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Repeat these steps to add more inputs to your form as needed.
 
-### Analyzing the Bundle Size
+## Scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The following npm scripts are available:
 
-### Making a Progressive Web App
+- `npm start`: Runs the app in development mode
+- `npm test`: Launches the test runner in interactive watch mode
+- `npm run build`: Builds the app for production to the `build` folder
+- `npm run eject`: Removes the single build dependency from your project
+- `npm run predeploy`: Runs before `deploy` and builds the project
+- `npm run deploy`: Deploys the application to GitHub Pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Important Packages
 
-### Advanced Configuration
+This project uses several important packages:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **React**: A JavaScript library for building user interfaces
+- **Material-UI**: A popular React UI framework
+  - `@mui/material`: Core Material-UI components
+  - `@mui/icons-material`: Material-UI icons
+- **lodash**: A modern JavaScript utility library
 
-### Deployment
+## Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This project was bootstrapped with Create React App. It uses React 18 and includes testing utilities from the @testing-library family.
 
-### `npm run build` fails to minify
+The project is set up with ESLint for code linting, extending the default Create React App configuration.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Deployment
+
+This project is configured for deployment to GitHub Pages. The deployment process is as follows:
+
+1. Run `npm run predeploy` to build the project
+2. Run `npm run deploy` to deploy the built files to the gh-pages branch
+
+The application will be deployed to: https://pradeepa45.github.io/form-generator
+
+Note: Make sure your repository is configured for GitHub Pages deployment.
+
+## Browser Support
+
+For production environments, this project supports browsers with usage of >0.2%, excluding dead browsers and Opera Mini.
+
+For development, it uses the latest versions of Chrome, Firefox, and Safari.
