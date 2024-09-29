@@ -4,10 +4,11 @@ import { Box, Button, Stack } from "@mui/material";
 import Input from "../form/Input";
 import CheckboxGroup from "../form/CheckboxGroup";
 import RadioGroup from "../form/RadioGroup";
-import Checkbox from "../form/Checkbox";
+import { uniqueId } from "lodash";
 
 export default function TextFieldGenerator({ name, onSave }) {
   const defaultFormInput = {
+    id: uniqueId(),
     required: false,
     disabled: false,
     label: "",
@@ -38,10 +39,10 @@ export default function TextFieldGenerator({ name, onSave }) {
     phone,
     password,
     multiline,
-    hasMinLength,
-    hasMaxLength,
-    minLength,
-    maxLength,
+    // hasMinLength,
+    // hasMaxLength,
+    // minLength,
+    // maxLength,
   } = inputProps;
   const handleCheckboxChange = (event) => {
     setProps({
@@ -51,6 +52,9 @@ export default function TextFieldGenerator({ name, onSave }) {
   };
 
   const handleInputChange = (event) => {
+    if (event.target.value) {
+      setError();
+    }
     setProps({
       ...inputProps,
       [event.target.name]: event.target.value,
@@ -60,13 +64,28 @@ export default function TextFieldGenerator({ name, onSave }) {
   const handleSave = () => {
     if (label && placeholder) {
       onSave({ ...inputProps, name });
-      setError(false);
+      setError();
       setProps(defaultFormInput);
-    } else {
-      setError(true);
-    }
+    } else if (!label || !placeholder)
+      setError({
+        message: "This field is required",
+      });
   };
 
+  const handleRadioChange = (options, name) => {
+    setProps((prevProps) => {
+      const updatedProps = { ...prevProps };
+      options.forEach((option) => {
+        const currName = option.name;
+        if (updatedProps.hasOwnProperty(currName)) {
+          updatedProps[currName] = currName === name;
+        }
+      });
+      return updatedProps;
+    });
+  };
+
+  console.log(text, email, phone);
   return (
     <Box style={{ paddingBlock: "16px" }}>
       <form
@@ -85,6 +104,7 @@ export default function TextFieldGenerator({ name, onSave }) {
             onChange={handleInputChange}
             required
             error={error}
+            setError={setError}
           />
           <Input
             label="Placeholder of the field"
@@ -93,6 +113,7 @@ export default function TextFieldGenerator({ name, onSave }) {
             value={placeholder}
             required
             error={error}
+            setError={setError}
             onChange={handleInputChange}
           />
           <CheckboxGroup
@@ -101,6 +122,7 @@ export default function TextFieldGenerator({ name, onSave }) {
               { label: "Required", value: required, name: "required" },
               { label: "Disabled", value: disabled, name: "disabled" },
               { label: "Numbers only", value: numeric, name: "numeric" },
+              { label: "Password", value: password, name: "password" },
               {
                 label: "Multi line input",
                 value: multiline,
@@ -115,10 +137,11 @@ export default function TextFieldGenerator({ name, onSave }) {
               { label: "Text (default)", value: text, name: "text" },
               { label: "Email", value: email, name: "email" },
               { label: "Phone number", value: phone, name: "phone" },
-              { label: "Password", value: password, name: "password" },
             ]}
             direction="row"
+            handleRadioChange={handleRadioChange}
           />
+          {/*
           <Stack direction="row" flexBasis="1" justifyContent="space-between">
             <Checkbox
               label="Mininum Length"
@@ -136,7 +159,7 @@ export default function TextFieldGenerator({ name, onSave }) {
               disabled={!hasMinLength}
             />
           </Stack>
-          <Stack direction="row" flexBasis={1} justifyContent="space-between">
+            <Stack direction="row" flexBasis={1} justifyContent="space-between">
             <Checkbox
               label="Maximum Length"
               name="hasMaxLength"
@@ -153,6 +176,7 @@ export default function TextFieldGenerator({ name, onSave }) {
               disabled={!hasMaxLength}
             />
           </Stack>
+            */}
         </Stack>
         <Button
           onClick={handleSave}

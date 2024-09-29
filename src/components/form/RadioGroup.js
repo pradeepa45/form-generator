@@ -1,5 +1,4 @@
 import {
-  Box,
   FormControl,
   FormLabel,
   RadioGroup as Group,
@@ -7,7 +6,12 @@ import {
 } from "@mui/material";
 import Radio from "./Radio";
 
-export default function RadioGroup({ options, label, direction = "column" }) {
+export default function RadioGroup({
+  options,
+  label,
+  direction = "column",
+  handleRadioChange = () => {},
+}) {
   return (
     <Stack>
       <FormControl>
@@ -20,7 +24,14 @@ export default function RadioGroup({ options, label, direction = "column" }) {
           }}
         >
           {options.map((option, id) => (
-            <Radio key={id} value={option.value} label={option.label} />
+            <Radio
+              key={id}
+              value={option.value}
+              label={option.label}
+              onClick={() => {
+                handleRadioChange(options, option.name);
+              }}
+            />
           ))}
         </Group>
       </FormControl>

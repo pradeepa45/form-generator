@@ -4,9 +4,11 @@ import Checkbox from "@mui/material/Checkbox";
 import { Box, Button, FormControlLabel, Stack } from "@mui/material";
 
 import OptionGenerator from "./OptionSet";
+import { uniqueId } from "lodash";
 
 export default function SelectGenerator({ name, onSave }) {
   const defaultFormInput = {
+    id: uniqueId(),
     required: false,
     disabled: false,
     label: "",
@@ -30,6 +32,9 @@ export default function SelectGenerator({ name, onSave }) {
   };
 
   const handleInputChange = (event) => {
+    if (event.target.value) {
+      setError();
+    }
     setProps({
       ...inputProps,
       [event.target.name]: event.target.value,
@@ -37,6 +42,11 @@ export default function SelectGenerator({ name, onSave }) {
   };
 
   const handleOptionsChange = (options) => {
+    if (options?.filter((option) => !option.label)) {
+      setError({
+        options: "All options must have a label",
+      });
+    }
     setProps({
       ...inputProps,
       options,
@@ -49,7 +59,9 @@ export default function SelectGenerator({ name, onSave }) {
       setError(false);
       setProps(defaultFormInput);
     } else {
-      setError(true);
+      setError({
+        message: "Please enter a label for the select input",
+      });
     }
   };
 
@@ -71,7 +83,8 @@ export default function SelectGenerator({ name, onSave }) {
             name="label"
             onChange={handleInputChange}
             required
-            error={error}
+            error={error?.message}
+            helperText={error?.message}
           />
           <FormControlLabel
             label="Is this field required?"
@@ -93,7 +106,11 @@ export default function SelectGenerator({ name, onSave }) {
               />
             }
           />
-          <OptionGenerator options={options} setOptions={handleOptionsChange} />
+          <OptionGenerator
+            options={options}
+            setOptions={handleOptionsChange}
+            error={error}
+          />
         </Stack>
         <Button
           onClick={handleSave}

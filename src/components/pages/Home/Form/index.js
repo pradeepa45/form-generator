@@ -32,7 +32,7 @@ export default function Form() {
   return (
     <Stack gap={2} padding={2}>
       <Box padding={2}>
-        <form>
+        <form method="POST">
           <FormControl fullWidth>
             <Select
               label="Choose an input type"

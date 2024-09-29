@@ -4,7 +4,7 @@ import { RemoveCircle } from "@mui/icons-material";
 
 import Input from "../form/Input";
 
-const Option = React.memo(({ option, handleChange, handleDelete }) => {
+const Option = React.memo(({ option, handleChange, handleDelete, error }) => {
   const { label, value, name } = option;
 
   return (
@@ -16,6 +16,7 @@ const Option = React.memo(({ option, handleChange, handleDelete }) => {
         fullWidth
         onChange={(event) => handleChange(event, name)}
         autoFocus
+        error={error?.options}
       />
       <Button
         variant="contained"

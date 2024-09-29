@@ -7,10 +7,10 @@ import GeneratedForm from "./GeneratedForm";
 export default function GeneratorGrid() {
   return (
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-      <Grid size={8}>
+      <Grid size={6}>
         <Form />
       </Grid>
-      <Grid size={4}>
+      <Grid size={6}>
         <GeneratedForm />
       </Grid>
     </Grid>

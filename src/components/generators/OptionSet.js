@@ -20,7 +20,7 @@ export default function OptionGenerator({ options, setOptions }) {
     const newOptions = [
       ...options,
       {
-        name: uniqueId(), // Generate a unique stable key only once when adding a new option
+        name: uniqueId(),
         label: "New Option",
         value: false,
       },
@@ -30,7 +30,6 @@ export default function OptionGenerator({ options, setOptions }) {
 
   const handleChange = React.useCallback(
     (event, name) => {
-      console.log(name);
       const updatedOptions = options.map((opt) => {
         if (opt.name === name) {
           return { ...opt, label: event.target.value };
